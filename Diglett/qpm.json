@@ -5,9 +5,9 @@
     "name": "Diglett",
     "id": "diglett",
     "version": "0.1.0",
-    "url": null,
+    "url": ,
     "additionalData": {
-      "overrideSoName": "libdiglett.so"
+      "overrideSoName": "libDiglett.so"
     }
   },
   "dependencies": [
