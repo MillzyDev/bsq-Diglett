@@ -1,0 +1,18 @@
+{
+	"_QPVersion": "0.1.1",
+	"name": "localisation-example",
+	"id": "localization-example",
+	"author": "Millzy",
+	"version": "0.1.0",
+	"packageId": "com.beatgames.beatsaber",
+	"packageVersion": "1.17.1",
+	"description": "an example use of Diglett",
+	"dependencies": [],
+	"modFiles": [
+		"liblocalization-example.so"
+	],
+	"libraryFiles": [
+		"libbeatsaber-hook_2_3_2.so"
+	],
+	"fileCopies": []
+}
