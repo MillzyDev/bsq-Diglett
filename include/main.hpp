@@ -16,7 +16,3 @@
 // Define these functions here so that we can easily read configuration and log information from other files
 Configuration& getConfig();
 Logger& getLogger();
-
-static bool ready = false; // if we are not ready we won't refresh
-
-static std::vector<std::string> csvs = { }; // vector of all our localisation files
