@@ -12,6 +12,9 @@ using namespace Polyglot;
 #include "UnityEngine/TextAsset.hpp"
 using namespace UnityEngine;
 
+#include "Register.cpp"
+using namespace Diglett;
+
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
 // Loads the config from disk using our modInfo, then returns it for use
@@ -37,28 +40,11 @@ extern "C" void setup(ModInfo& info) {
     getLogger().info("Completed setup!");
 }
 
-MAKE_HOOK_MATCH(QuestAppInit_InstallBindings, &QuestAppInit::InstallBindings, void,
-QuestAppInit *self
-) {
-    QuestAppInit_InstallBindings(self);
-
-    for (const std::string& csv : csvs) {
-        auto asset = LocalizationAsset::New_ctor();
-        asset->set_Format(GoogleDriveDownloadFormat::CSV);
-        asset->set_TextAsset(il2cpp_utils::New<TextAsset *>(il2cpp_utils::newcsstr(csv)).value());
-
-        Localization::get_Instance()->get_InputFiles()->Add(asset);
-    }
-
-    LocalizationImporter::Refresh();
-    ready = true;
-}
-
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Installing hooks...");
-    INSTALL_HOOK(getLogger(), QuestAppInit_InstallBindings);
+
     getLogger().info("Installed all hooks!");
 }
