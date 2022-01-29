@@ -2,7 +2,7 @@
 include(qpm_defines.cmake)
 
 # override mod id
-set(MOD_ID "diglott")
+set(MOD_ID "diglett")
 
 # Enable link time optimization
 # In my experience, this can be highly unstable but it nets a huge size optimization and likely performance
@@ -44,7 +44,7 @@ add_library(
 
 target_include_directories(${COMPILE_ID} PRIVATE .)
 
-#target_include_directories(${COMPILE_ID} PRIVATE extern/includes/questui_components)
+target_include_directories(${COMPILE_ID} PRIVATE extern/includes/questui_components)
 
 # add src dir as include dir
 target_include_directories(${COMPILE_ID} PRIVATE ${SOURCE_DIR})

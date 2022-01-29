@@ -32,13 +32,13 @@ extern "C" void setup(ModInfo& info) {
     info.id = ID;
     info.version = VERSION;
     modInfo = info;
-	
+
     getConfig().Load(); // Load the config file
     getLogger().info("Completed setup!");
 }
 
 MAKE_HOOK_MATCH(QuestAppInit_InstallBindings, &QuestAppInit::InstallBindings, void,
-    QuestAppInit *self
+QuestAppInit *self
 ) {
     QuestAppInit_InstallBindings(self);
 

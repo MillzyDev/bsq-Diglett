@@ -4,16 +4,16 @@
 #include "Polyglot/LocalizationImporter.hpp"
 using namespace Polyglot;
 
-void DiGlott::registerLocalization(std::string csv) {
+void Diglett::registerLocalization(std::string csv) {
     csvs.push_back(csv);
 }
 
-void DiGlott::registerLocalizationFromFile(std::string path) {
+void Diglett::registerLocalizationFromFile(std::string path) {
     std::string csv = readfile(path);
     registerLocalization(csv);
 }
 
-bool DiGlott::refreshLocalization() {
+bool Diglett::refreshLocalization() {
     if (!ready) return false;
     else {
         LocalizationImporter::Refresh();

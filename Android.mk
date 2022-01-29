@@ -34,14 +34,14 @@ LOCAL_CPP_FEATURES += exceptions
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := diglott
+LOCAL_MODULE := diglett
 LOCAL_SRC_FILES += $(call rwildcard,src/,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.c)
 LOCAL_SHARED_LIBRARIES += modloader
 LOCAL_SHARED_LIBRARIES += beatsaber-hook_2_3_0
 LOCAL_LDLIBS += -llog
-LOCAL_CFLAGS += -I'extern/libil2cpp/il2cpp/libil2cpp' -DID='"diglott"' -DVERSION='"0.1.0"' -I'./shared' -I'./extern' -isystem'extern/codegen/include'
+LOCAL_CFLAGS += -I'extern/libil2cpp/il2cpp/libil2cpp' -DID='"diglett"' -DVERSION='"0.1.0"' -I'./shared' -I'./extern' -isystem'extern/codegen/include'
 LOCAL_CPPFLAGS += -std=c++2a
 LOCAL_C_INCLUDES += ./include ./src
 include $(BUILD_SHARED_LIBRARY)

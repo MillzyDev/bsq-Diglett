@@ -2,18 +2,18 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "DiGlott",
-    "id": "diglott",
+    "name": "Diglett",
+    "id": "diglett",
     "version": "0.1.0",
-    "url": "https://github.com/MillzyDev/DiGlott",
+    "url": null,
     "additionalData": {
-      "overrideSoName": "libDiGlott.so"
+      "overrideSoName": "libdiglett.so"
     }
   },
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "=3.6.5",
+      "versionRange": "*",
       "additionalData": {
         "extraFiles": [
           "src/inline-hook"
@@ -22,7 +22,7 @@
     },
     {
       "id": "modloader",
-      "versionRange": "^1.2.3",
+      "versionRange": "*",
       "additionalData": {}
     },
     {
@@ -33,11 +33,6 @@
     {
       "id": "codegen",
       "versionRange": "^0.19.2",
-      "additionalData": {}
-    },
-    {
-      "id": "libcurl",
-      "versionRange": "^7.78.0",
       "additionalData": {}
     }
   ],

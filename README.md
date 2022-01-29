@@ -1,4 +1,4 @@
-# DiGlott
+# Diglett
 
 library that allows you to easily add localisation for your quest mods
 

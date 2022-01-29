@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace DiGlott {
+namespace Diglett {
     void registerLocalization(std::string csv);
     void registerLocalizationFromFile(std::string path);
 

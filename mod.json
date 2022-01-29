@@ -1,15 +1,15 @@
 {
   "_QPVersion": "0.1.2",
-  "name": "DiGlott",
-  "id": "diglott",
+  "name": "Diglett",
+  "id": "diglett",
   "author": "Millzy",
   "version": "0.1.0",
   "packageId": "com.beatgames.beatsaber",
   "packageVersion": "1.0.0",
-  "description": "diglott, version 0.1.0!",
+  "description": "library that allows you to easily add localisation for your quest mods - v0.1.0!",
   "dependencies": [],
   "modFiles": [
-    "libdiglott.so"
+    "libdiglett.so"
   ],
   "libraryFiles": [
     "libbeatsaber-hook_2_3_2.so"
