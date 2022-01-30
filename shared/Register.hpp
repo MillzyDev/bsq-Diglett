@@ -34,7 +34,7 @@ namespace Diglett {
         template<Languages L>
         static void RegisterLocales(rapidjson::MemoryStream memoryStream) {
             getLogger().info("Registering JSON locale");
-            LocalizationDocument ld;
+            LocalizationDocument *ld =  nullptr;
             switch (L) {
                 case Languages::EN:
                     ld = LocalizationDocument::GetEN();
@@ -56,7 +56,7 @@ namespace Diglett {
                     break;
             }
 
-            ld.AddLocalizations(Parsing::ParseJson(memoryStream));
+            ld->AddLocalizations(Parsing::ParseJson(memoryStream));
         }
     };
 }

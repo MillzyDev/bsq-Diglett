@@ -45,6 +45,6 @@ extern "C" void load() {
     Register::RegisterLocales<Languages::JA>(ASSET_TO_JSON(ja_json));
     Register::RegisterLocales<Languages::KO>(ASSET_TO_JSON(ko_json));
 
-    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN().Get("Diglett:Tests:Test1").c_str());
+    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN()->Get("Diglett:Tests:Test1").c_str());
 //#endif
 }
