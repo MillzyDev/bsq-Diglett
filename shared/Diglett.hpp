@@ -6,4 +6,6 @@
 
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
 
+#define Language Diglett::Languages
+
 typedef Diglett::LocalizationDocument Localization;
