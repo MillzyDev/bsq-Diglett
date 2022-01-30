@@ -38,13 +38,14 @@ extern "C" void load() {
     getLogger().info("Registering locales");
 
 //#ifdef TESTS
-    Register::RegisterLocales<Languages::EN>(ASSET_TO_JSON(en_json));
-    Register::RegisterLocales<Languages::FR>(ASSET_TO_JSON(fr_json));
-    Register::RegisterLocales<Languages::ES>(ASSET_TO_JSON(es_json));
-    Register::RegisterLocales<Languages::DE>(ASSET_TO_JSON(de_json));
-    Register::RegisterLocales<Languages::JA>(ASSET_TO_JSON(ja_json));
-    Register::RegisterLocales<Languages::KO>(ASSET_TO_JSON(ko_json));
+    Register::RegisterLocales<Languages::EN>(ASSET_TO_XML(en_xml));
+    Register::RegisterLocales<Languages::FR>(ASSET_TO_XML(fr_xml));
+    Register::RegisterLocales<Languages::ES>(ASSET_TO_XML(es_xml));
+    Register::RegisterLocales<Languages::DE>(ASSET_TO_XML(de_xml));
+    Register::RegisterLocales<Languages::JA>(ASSET_TO_XML(ja_xml));
+    Register::RegisterLocales<Languages::KO>(ASSET_TO_XML(ko_xml));
 
-    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN()->Get("Diglett:Tests:Test1").c_str());
+    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN()->Get("Diglett:Tests:Test2").c_str());
+    getLogger().info("An Example Spanish Localization: %s", LocalizationDocument::GetES()->Get("Diglett:Tests:Test2").c_str());
 //#endif
 }
