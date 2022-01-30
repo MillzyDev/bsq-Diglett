@@ -4,6 +4,7 @@
 #include <utility>
 #include <string>
 
+#include "beatsaber-hook/shared/config/rapidjson-utils.hpp"
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
 
 namespace Diglett {
