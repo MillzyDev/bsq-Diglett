@@ -1,19 +1,12 @@
 #include "main.hpp"
 
-#include "GlobalNamespace/QuestAppInit.hpp"
-using namespace GlobalNamespace;
-
-#include "Polyglot/LocalizationAsset.hpp"
-#include "Polyglot/Localization.hpp"
-#include "Polyglot/LocalizationImporter.hpp"
-#include "Polyglot/GoogleDriveDownloadFormat.hpp"
-using namespace Polyglot;
-
-#include "UnityEngine/TextAsset.hpp"
-using namespace UnityEngine;
-
-#include "Register.cpp"
+#ifdef TESTS
+#include "Diglett.hpp"
 using namespace Diglett;
+
+#include "assets.hpp"
+#endif
+
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -44,7 +37,12 @@ extern "C" void setup(ModInfo& info) {
 extern "C" void load() {
     il2cpp_functions::Init();
 
-    getLogger().info("Installing hooks...");
-
-    getLogger().info("Installed all hooks!");
+#ifdef TESTS
+    Register::RegisterLocales<Languages::EN>(ASSET_TO_JSON(en_json));
+    Register::RegisterLocales<Languages::FR>(ASSET_TO_JSON(fr_json));
+    Register::RegisterLocales<Languages::ES>(ASSET_TO_JSON(es_json));
+    Register::RegisterLocales<Languages::DE>(ASSET_TO_JSON(de_json));
+    Register::RegisterLocales<Languages::JA>(ASSET_TO_JSON(ja_json));
+    Register::RegisterLocales<Languages::KO>(ASSET_TO_JSON(ko_json));
+#endif
 }

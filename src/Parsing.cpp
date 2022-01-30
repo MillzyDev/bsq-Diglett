@@ -6,9 +6,9 @@ using namespace rapidjson;
 
 #include <utility>
 
-std::map<std::string, std::string> Parsing::ParseJson(std::string json) {
+std::map<std::string, std::string> Parsing::ParseJson(rapidjson::MemoryStream memoryStream) {
     Document document;
-    document.Parse(json.c_str());
+    document.ParseStream(memoryStream);
 
     auto map = std::map<std::string, std::string>();
 

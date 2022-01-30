@@ -6,13 +6,8 @@ std::string LocalizationDocument::operator[](std::string key) {
     return translations[key];
 }
 
-template<Format F>
-void LocalizationDocument::AddLocalizations(std::string fileContent) {
-    switch (F) {
-        case Format::JSON:
-            auto parsed = Parsing::ParseJson(fileContent);
-            translations.merge(parsed);
-    }
+void LocalizationDocument::AddLocalizations(std::map<std::string, std::string> map) {
+    translations.merge(map);
 }
 
 LocalizationDocument *LocalizationDocument::GetEN() { return EN; }

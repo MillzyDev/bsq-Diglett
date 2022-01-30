@@ -66,10 +66,8 @@ namespace Diglett {
 
         /**
          * Adds new localisations to the document from the contents of a file
-         * @tparam F The file format of the inputted string
-         * @param file The contents of the file that will be deserialized
+         * @param map The map of all the new key-value entries
          */
-        template<Format F>
-        void AddLocalizations(std::string fileContent);
+        void AddLocalizations(std::map<std::string, std::string> map);
     };
 }

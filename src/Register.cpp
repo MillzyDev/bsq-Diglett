@@ -1,9 +1,10 @@
 #include "Register.hpp"
 #include "LocalizationDocument.hpp"
+#include "Parsing.hpp"
 using namespace Diglett;
 
-template<Format F, Languages L>
-void Register::RegisterLocales(std::string file) {
+template<Languages L>
+void Register::RegisterLocales(rapidjson::MemoryStream memoryStream) {
     LocalizationDocument *ld;
     switch (L) {
         default:
@@ -27,5 +28,5 @@ void Register::RegisterLocales(std::string file) {
             break;
     }
 
-    ld->AddLocalizations<F>(file);
+    ld->AddLocalizations(Parsing::ParseJson(memoryStream));
 }

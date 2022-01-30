@@ -5,25 +5,24 @@
 
 #include <string>
 
+#include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
+
 /**
- * Used to convert assets from " laurie's fully™️-functional objcopy cmake script" to strings without too much eyesore
+ * Used to convert assets from " laurie's fully™️-functional objcopy cmake script" to rapidjson::MemoryStreams without too much eyesore
  */
-#define ASSET_TO_STRING(asset)                                  \
-    char *asset##_str = new char[asset::getLength() + 1];       \
-    memcpy(asset##_str, asset::getData, asset::getLength());    \
-    asset##_str[asset::getLength()] = '\0'                      \
+#define ASSET_TO_JSON(asset) rapidjson::MemoryStream(reinterpret_cast<char *>(asset::getData), asset::getLength())
+
 
 namespace Diglett {
     class Register {
 
     public:
         /**
-         * Register locale files
-         * @tparam F The file format of the inputted file
+         * Register locale json files
          * @tparam L The language of the inputted file
-         * @param file The contents of the file
+         * @param file The input json file
          */
-        template<Format F, Languages L>
-        static void RegisterLocales(std::string file);
+        template<Languages L>
+        static void RegisterLocales(rapidjson::MemoryStream file);
     };
 }
