@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <map>
 #include <utility>
 #include <string>
 
@@ -9,7 +9,7 @@
 namespace Diglett {
     class Parsing {
     public:
-        static std::vector<std::pair<std::string, std::string>> ParseJson(rapidjson::MemoryStream memoryStream);
-        static std::vector<std::pair<std::string, std::string>> ParseXml(char *xml);
+        static std::map<std::string, std::string> ParseJson(rapidjson::MemoryStream memoryStream);
+        static std::map<std::string, std::string> ParseXml(char *xml);
     };
 }

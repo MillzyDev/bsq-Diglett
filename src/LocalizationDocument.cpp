@@ -14,13 +14,8 @@ LocalizationDocument *LocalizationDocument::KO = new LocalizationDocument();
 
 std::map<std::string, LocalizationDocument *> LocalizationDocument::customLocalizationDocuments = std::map<std::string, LocalizationDocument *>();
 
-void LocalizationDocument::AddLocalizations(std::vector<std::pair<std::string, std::string>> map) {
-
-    std::vector<std::pair<std::string, std::string>> combined = translations;
-    combined.reserve(translations.size() + map.size());
-    combined.insert(combined.end(), translations.begin(), translations.end());
-    combined.insert(combined.end(), map.begin(), map.end());
-    translations = combined;
+void LocalizationDocument::AddLocalizations(std::map<std::string, std::string> map) {
+    translations.merge(map);
 
     for (const auto& pair : map) {
         getLogger().info("Registered key %s with value %s", pair.first.c_str(), pair.second.c_str());
@@ -40,7 +35,7 @@ LocalizationDocument *LocalizationDocument::GetJA() { return JA; }
 LocalizationDocument *LocalizationDocument::GetKO() { return KO; }
 
 LocalizationDocument::LocalizationDocument() {
-    translations = std::vector<std::pair<std::string, std::string>>();
+    translations = std::map<std::string, std::string>();
 }
 
 std::string LocalizationDocument::Get(const std::string& key) {
