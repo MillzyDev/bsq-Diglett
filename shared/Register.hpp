@@ -8,10 +8,14 @@
 
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
 
+#include "rapidxml/rapidxml.hpp"
+
 /**
  * Used to convert assets from " laurie's fully™️-functional objcopy cmake script" to rapidjson::MemoryStreams without too much eyesore
  */
 #define ASSET_TO_JSON(asset) rapidjson::MemoryStream(copyStr(asset::getData(), asset::getLength()), asset::getLength())
+
+#define ASSET_TO_XML(asset) copyStr(asset::getData(), asset::getLength())
 
 inline char *copyStr(uint8_t *data, size_t length) {
     char* str = new char[length + 1];
@@ -27,13 +31,34 @@ namespace Diglett {
 
 
         /**
-         * Register locale json files
+         * Register json locale files
          * @tparam L The language of the inputted file
          * @param file The input json file
          */
         template<Languages L>
         static void RegisterLocales(rapidjson::MemoryStream memoryStream) {
             getLogger().info("Registering JSON locale");
+            LocalizationDocument *ld = GetDocument<L>();
+
+            ld->AddLocalizations(Parsing::ParseJson(memoryStream));
+        }
+
+        /**
+         * Register xml locale files
+         * @tparam L  The language of the inputted file
+         * @param xml  The input xml file
+         */
+        template<Languages L>
+        static void RegisterLocales(char *xml) {
+            getLogger().info("Registering XML locale");
+            LocalizationDocument *ld = GetDocument<L>();
+
+            ld->AddLocalizations(Parsing::ParseXml(xml));
+        }
+
+    private:
+        template<Languages L>
+        static LocalizationDocument *GetDocument() {
             LocalizationDocument *ld =  nullptr;
             switch (L) {
                 case Languages::EN:
@@ -55,8 +80,7 @@ namespace Diglett {
                     ld = LocalizationDocument::GetKO();
                     break;
             }
-
-            ld->AddLocalizations(Parsing::ParseJson(memoryStream));
+            return ld;
         }
     };
 }
