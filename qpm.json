@@ -5,7 +5,7 @@
     "name": "Diglett",
     "id": "diglett",
     "version": "0.1.0",
-    "url": ,
+    "url": "https://github.com/MillzyDev/bsq-Diglett",
     "additionalData": {
       "overrideSoName": "libDiglett.so"
     }
@@ -23,11 +23,6 @@
     {
       "id": "modloader",
       "versionRange": "*",
-      "additionalData": {}
-    },
-    {
-      "id": "custom-types",
-      "versionRange": "^0.15.5",
       "additionalData": {}
     },
     {
