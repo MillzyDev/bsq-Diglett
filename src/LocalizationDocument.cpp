@@ -39,7 +39,7 @@ LocalizationDocument::LocalizationDocument() {
 }
 
 std::u16string LocalizationDocument::Get(const std::string& key) {
-    if (!translations[key].empty()) return translations[key];
+    if (!translations[key].empty()) return translations.find(key)->second;
     else return to_utf16(key);
 }
 
