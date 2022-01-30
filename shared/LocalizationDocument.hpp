@@ -68,7 +68,7 @@ namespace Diglett {
         static LocalizationDocument *GetKO();
 
         /**
-         * Gets a LocalizationDocument for a custom language
+         * Gets a LocalizationDocument for a custom language WARNING: WILL CAUSE NULLPTR DEREF
          * @param name The name/id of the language to get
          * @return A LocalizationDocument of the custom language
          */
