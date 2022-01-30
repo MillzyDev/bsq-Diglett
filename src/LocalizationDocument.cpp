@@ -12,6 +12,8 @@ LocalizationDocument *LocalizationDocument::DE = new LocalizationDocument();
 LocalizationDocument *LocalizationDocument::JA = new LocalizationDocument();
 LocalizationDocument *LocalizationDocument::KO = new LocalizationDocument();
 
+std::map<std::string, LocalizationDocument *> LocalizationDocument::customLocalizationDocuments = std::map<std::string, LocalizationDocument *>();
+
 void LocalizationDocument::AddLocalizations(std::vector<std::pair<std::string, std::string>> map) {
 
     std::vector<std::pair<std::string, std::string>> combined = translations;
@@ -56,7 +58,7 @@ std::string LocalizationDocument::Get(const std::string& key) {
 }
 
 LocalizationDocument *LocalizationDocument::GetCustom(std::string name) {
-    return nullptr;
+    return customLocalizationDocuments[name];
 }
 
 LocalizationDocument *LocalizationDocument::GetSelected() {

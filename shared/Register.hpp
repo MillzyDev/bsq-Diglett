@@ -5,6 +5,7 @@
 #include "Parsing.hpp"
 
 #include <string>
+#include <utility>
 
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
 
@@ -56,10 +57,32 @@ namespace Diglett {
             ld->AddLocalizations(Parsing::ParseXml(xml));
         }
 
+        /**
+         * Register json custom locale files
+         * @param file The input json file
+         */
+        static void RegisterCustomLocales(std::string name, rapidjson::MemoryStream memoryStream) {
+            getLogger().info("Registering JSON locale");
+            LocalizationDocument *ld = GetCustomDocument(std::move(name));
+
+            ld->AddLocalizations(Parsing::ParseJson(memoryStream));
+        }
+
+        /**
+         * Register xml custom locale files
+         * @param xml  The input xml file
+         */
+        static void RegisterCustomLocales(std::string name, char *xml) {
+            getLogger().info("Registering XML locale");
+            LocalizationDocument *ld = GetCustomDocument(std::move(name));
+
+            ld->AddLocalizations(Parsing::ParseXml(xml));
+        }
+
     private:
         template<Languages L>
         static LocalizationDocument *GetDocument() {
-            LocalizationDocument *ld =  nullptr;
+            LocalizationDocument *ld = nullptr;
             switch (L) {
                 case Languages::English:
                     ld = LocalizationDocument::GetEN();
@@ -81,6 +104,10 @@ namespace Diglett {
                     break;
             }
             return ld;
+        }
+
+        static LocalizationDocument *GetCustomDocument(std::string name) {
+            return LocalizationDocument::GetCustom(std::move(name));
         }
     };
 }

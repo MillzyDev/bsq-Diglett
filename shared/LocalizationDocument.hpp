@@ -18,7 +18,7 @@ namespace Diglett {
         static LocalizationDocument *DE;
         static LocalizationDocument *JA;
         static LocalizationDocument *KO;
-        static std::map<std::string, > customLocalizationDocuments;
+        static std::map<std::string, LocalizationDocument *> customLocalizationDocuments;
 
         std::vector<std::pair<std::string, std::string>> translations;
 
