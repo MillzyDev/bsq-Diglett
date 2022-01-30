@@ -9,7 +9,7 @@
 namespace Diglett {
     class Parsing {
     public:
-        static std::map<std::string, std::string> ParseJson(rapidjson::MemoryStream memoryStream);
-        static std::map<std::string, std::string> ParseXml(char *xml);
+        static std::map<std::string, std::u16string> ParseJson(rapidjson::MemoryStream memoryStream);
+        static std::map<std::string, std::u16string> ParseXml(char *xml);
     };
 }

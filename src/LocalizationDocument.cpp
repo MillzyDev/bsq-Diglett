@@ -14,11 +14,11 @@ LocalizationDocument *LocalizationDocument::KO = new LocalizationDocument();
 
 std::map<std::string, LocalizationDocument *> LocalizationDocument::customLocalizationDocuments = std::map<std::string, LocalizationDocument *>();
 
-void LocalizationDocument::AddLocalizations(std::map<std::string, std::string> map) {
+void LocalizationDocument::AddLocalizations(std::map<std::string, std::u16string> map) {
     translations.merge(map);
 
     for (const auto& pair : map) {
-        getLogger().info("Registered key %s with value %s", pair.first.c_str(), pair.second.c_str());
+        getLogger().info("Registered key %s with value %s", pair.first.c_str(), to_utf8(pair.second).c_str());
     }
 }
 
@@ -35,24 +35,15 @@ LocalizationDocument *LocalizationDocument::GetJA() { return JA; }
 LocalizationDocument *LocalizationDocument::GetKO() { return KO; }
 
 LocalizationDocument::LocalizationDocument() {
-    translations = std::map<std::string, std::string>();
+    translations = std::map<std::string, std::u16string>();
 }
 
-std::string LocalizationDocument::Get(const std::string& key) {
-    std::string first = std::string();
-    std::string second = std::string();
-    for (auto & translation : translations) {
-        getLogger().info("Checking key %s", translation.first.c_str());
-        if (translation.first == key) {
-            first = translation.first;
-            second = translation.second;
-        }
-    }
-    if (first.empty() && second.empty()) return key;
-    else return second;
+std::u16string LocalizationDocument::Get(const std::string& key) {
+    if (!translations[key].empty()) return translations[key];
+    else return to_utf16(key);
 }
 
-LocalizationDocument *LocalizationDocument::GetCustom(std::string name) {
+LocalizationDocument *LocalizationDocument::GetCustom(const std::string& name) {
     return customLocalizationDocuments[name];
 }
 

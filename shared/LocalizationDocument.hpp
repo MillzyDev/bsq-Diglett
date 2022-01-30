@@ -19,7 +19,7 @@ namespace Diglett {
         static LocalizationDocument *KO;
         static std::map<std::string, LocalizationDocument *> customLocalizationDocuments;
 
-        std::map<std::string, std::string> translations;
+        std::map<std::string, std::u16string> translations;
 
     public:
         LocalizationDocument();
@@ -29,7 +29,7 @@ namespace Diglett {
          * @param key The key of the desired localization
          * @return  The localized string for the document language
          */
-        std::string Get(const std::string& key);
+        std::u16string Get(const std::string& key);
 
         /**
          *
@@ -72,7 +72,7 @@ namespace Diglett {
          * @param name The name/id of the language to get
          * @return A LocalizationDocument of the custom language
          */
-        static LocalizationDocument *GetCustom(std::string name);
+        static LocalizationDocument *GetCustom(const std::string& name);
 
         /**
          * Gets the LocalizationDocument of that language the is currently selected by Polyglot
@@ -84,6 +84,6 @@ namespace Diglett {
          * Adds new localisations to the document from the contents of a file
          * @param map The map of all the new key-value entries
          */
-        void AddLocalizations(std::map<std::string, std::string> map);
+        void AddLocalizations(std::map<std::string, std::u16string> map);
     };
 }
