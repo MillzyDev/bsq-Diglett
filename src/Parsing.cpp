@@ -1,6 +1,7 @@
 #include "Parsing.hpp"
 using namespace Diglett;
 
+#include "beatsaber-hook/shared/config/rapidjson-utils.hpp"
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/document.h"
 #include "rapidxml/rapidxml.hpp"
 
