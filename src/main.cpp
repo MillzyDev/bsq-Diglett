@@ -55,9 +55,9 @@ extern "C" void load() {
     Register::RegisterLocales<Languages::Korean>(ASSET_TO_JSON(ko_json));
     Register::RegisterLocales<Languages::Korean>(ASSET_TO_XML(ko_xml));
 
-    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN()->Get("Diglett:Tests:Test1").c_str());
-    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN()->Get("Diglett:Tests:Test2").c_str());
+    getLogger().info("An Example English Localization: %s", to_utf8(LocalizationDocument::GetEN()->Get("Diglett:Tests:Test1")).c_str());
+    getLogger().info("An Example English Localization: %s", to_utf8(LocalizationDocument::GetEN()->Get("Diglett:Tests:Test2")).c_str());
 
-    getLogger().info("An Example Spanish Localization: %s", LocalizationDocument::GetES()->Get("Diglett:Tests:Test1").c_str());
-    getLogger().info("An Example Spanish Localization: %s", LocalizationDocument::GetES()->Get("Diglett:Tests:Test2").c_str());
+    getLogger().info("An Example Spanish Localization: %s", to_utf8(LocalizationDocument::GetES()->Get("Diglett:Tests:Test1")).c_str());
+    getLogger().info("An Example Spanish Localization: %s", to_utf8(LocalizationDocument::GetES()->Get("Diglett:Tests:Test2")).c_str());
 }
