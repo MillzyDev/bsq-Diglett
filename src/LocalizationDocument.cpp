@@ -1,6 +1,8 @@
 #include "LocalizationDocument.hpp"
 using namespace Diglett;
 
+#include "main.hpp"
+
 LocalizationDocument LocalizationDocument::EN = LocalizationDocument();
 LocalizationDocument LocalizationDocument::FR = LocalizationDocument();
 LocalizationDocument LocalizationDocument::ES = LocalizationDocument();
@@ -9,11 +11,14 @@ LocalizationDocument LocalizationDocument::JA = LocalizationDocument();
 LocalizationDocument LocalizationDocument::KO = LocalizationDocument();
 
 std::string LocalizationDocument::operator[](std::string key) {
-    return translations[key];
+    return translations.find(key)->second;
 }
 
 void LocalizationDocument::AddLocalizations(std::map<std::string, std::string> map) {
     translations.merge(map);
+    for (const auto& pair : map) {
+        getLogger().info("Registered key %s with value %s", pair.first.c_str(), pair.second.c_str());
+    }
 }
 
 LocalizationDocument LocalizationDocument::GetEN() { return EN; }
@@ -30,4 +35,5 @@ LocalizationDocument LocalizationDocument::GetKO() { return KO; }
 
 LocalizationDocument::LocalizationDocument() {
     translations = std::map<std::string, std::string>();
+
 }
