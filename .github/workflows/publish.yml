@@ -77,7 +77,7 @@ jobs:
 
       - name: QPM Edit Version
         run: |
-          ./QPM/qpm-rust package edit --version "${GITHUB_REF/refs\/tags\//}"
+          ./QPM/qpm-rust package edit --version "${$GITHUB_REF | cut -d / -f 3}"
 
       - name: Build
         run: |
