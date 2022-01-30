@@ -61,22 +61,22 @@ namespace Diglett {
         static LocalizationDocument *GetDocument() {
             LocalizationDocument *ld =  nullptr;
             switch (L) {
-                case Languages::EN:
+                case Languages::English:
                     ld = LocalizationDocument::GetEN();
                     break;
-                case Languages::FR:
+                case Languages::French:
                     ld = LocalizationDocument::GetFR();
                     break;
-                case Languages::ES:
+                case Languages::Spanish:
                     ld = LocalizationDocument::GetES();
                     break;
-                case Languages::DE:
+                case Languages::German:
                     ld = LocalizationDocument::GetDE();
                     break;
-                case Languages::JA:
+                case Languages::Japanese:
                     ld = LocalizationDocument::GetJA();
                     break;
-                case Languages::KO:
+                case Languages::Korean:
                     ld = LocalizationDocument::GetKO();
                     break;
             }
