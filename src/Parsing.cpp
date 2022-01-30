@@ -2,14 +2,14 @@
 using namespace Diglett;
 
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/document.h"
-using namespace rapidjson;
+#include "rapidxml/rapidxml.hpp"
 
 #include "main.hpp"
 
 #include <utility>
 
 std::vector<std::pair<std::string, std::string>> Parsing::ParseJson(rapidjson::MemoryStream memoryStream) {
-    Document document;
+    rapidjson::Document document;
     document.ParseStream(memoryStream);
 
     auto map = std::vector<std::pair<std::string, std::string>>();
@@ -17,6 +17,21 @@ std::vector<std::pair<std::string, std::string>> Parsing::ParseJson(rapidjson::M
     for (auto &obj : document.GetObject()) {
         getLogger().info("Adding locale to map - %s: %s", obj.name.GetString(), obj.value.GetString());
         map.emplace_back(obj.name.GetString(), obj.value.GetString());
+    }
+
+    return map;
+}
+
+std::vector<std::pair<std::string, std::string>> Parsing::ParseXml(char *xml) {
+    rapidxml::xml_document<> document;
+    document.parse<0>(xml);
+
+    auto map = std::vector<std::pair<std::string, std::string>>();
+    auto resources = document.first_node("resources");
+
+    for (rapidxml::xml_node<> *node = resources->first_node("string"); node; node = node->next_sibling("string")) {
+        getLogger().info("Adding locale to map - %s: %s", node->first_attribute("name")->value(), node->value());
+        map.emplace_back(std::pair<std::string, std::string>(node->first_attribute("name")->value(), node->value()));
     }
 
     return map;
