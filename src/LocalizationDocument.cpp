@@ -44,6 +44,9 @@ std::u16string LocalizationDocument::Get(const std::string& key) {
 }
 
 LocalizationDocument *LocalizationDocument::GetCustom(const std::string& name) {
+    if (customLocalizationDocuments.find(name) == customLocalizationDocuments.end())
+        customLocalizationDocuments.insert(std::pair<std::string, LocalizationDocument *>(name, new LocalizationDocument()));
+
     return customLocalizationDocuments[name];
 }
 
