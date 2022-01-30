@@ -4,7 +4,7 @@
   "info": {
     "name": "Diglett",
     "id": "diglett",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "url": "https://github.com/MillzyDev/bsq-Diglett",
     "additionalData": {
       "overrideSoName": "libDiglett.so"

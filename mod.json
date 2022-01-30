@@ -3,9 +3,9 @@
   "name": "Diglett",
   "id": "diglett",
   "author": "Millzy",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "packageId": "com.beatgames.beatsaber",
-  "packageVersion": "1.0.0",
+  "packageVersion": "1.19.0",
   "description": "library that allows you to easily add localisation for your quest mods - v0.1.0!",
   "dependencies": [],
   "modFiles": [
