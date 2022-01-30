@@ -1,11 +1,9 @@
 #include "main.hpp"
 
-#ifdef TESTS
 #include "Diglett.hpp"
 using namespace Diglett;
 
 #include "assets.hpp"
-#endif
 
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
@@ -37,7 +35,9 @@ extern "C" void setup(ModInfo& info) {
 extern "C" void load() {
     il2cpp_functions::Init();
 
-#ifdef TESTS
+    getLogger().info("Registering locales");
+
+//#ifdef TESTS
     Register::RegisterLocales<Languages::EN>(ASSET_TO_JSON(en_json));
     Register::RegisterLocales<Languages::FR>(ASSET_TO_JSON(fr_json));
     Register::RegisterLocales<Languages::ES>(ASSET_TO_JSON(es_json));
@@ -45,7 +45,6 @@ extern "C" void load() {
     Register::RegisterLocales<Languages::JA>(ASSET_TO_JSON(ja_json));
     Register::RegisterLocales<Languages::KO>(ASSET_TO_JSON(ko_json));
 
-    getLogger().info("%s", LocalizationDocument::GetEN()["Diglett:Tests:Test1"].c_str());
-    getLogger().info("%s", LocalizationDocument::GetJA()["Diglett:Tests:Test1"].c_str());
-#endif
+    getLogger().info("An Example English Localization: %s", LocalizationDocument::GetEN()["Diglett:Tests:Test1"].c_str());
+//#endif
 }
