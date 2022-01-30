@@ -1,7 +1,6 @@
 #include "main.hpp"
 
 #include "Diglett.hpp"
-using namespace Diglett;
 
 #include "assets.hpp"
 
@@ -37,27 +36,27 @@ extern "C" void load() {
 
     getLogger().info("Registering locales");
 
-    Register::RegisterLocales<Languages::English>(ASSET_TO_JSON(en_json));
-    Register::RegisterLocales<Languages::English>(ASSET_TO_XML(en_xml));
+    Diglett::Register::RegisterLocales<Language::English>(getLogger(), ASSET_TO_JSON(en_json));
+    Diglett::Register::RegisterLocales<Language::English>(getLogger(), ASSET_TO_XML(en_xml));
 
-    Register::RegisterLocales<Languages::French>(ASSET_TO_JSON(fr_json));
-    Register::RegisterLocales<Languages::French>(ASSET_TO_XML(fr_xml));
+    Diglett::Register::RegisterLocales<Language::French>(getLogger(), ASSET_TO_JSON(fr_json));
+    Diglett::Register::RegisterLocales<Language::French>(getLogger(), ASSET_TO_XML(fr_xml));
 
-    Register::RegisterLocales<Languages::Spanish>(ASSET_TO_JSON(es_json));
-    Register::RegisterLocales<Languages::Spanish>(ASSET_TO_XML(es_xml));
+    Diglett::Register::RegisterLocales<Language::Spanish>(getLogger(), ASSET_TO_JSON(es_json));
+    Diglett::Register::RegisterLocales<Language::Spanish>(getLogger(), ASSET_TO_XML(es_xml));
 
-    Register::RegisterLocales<Languages::German>(ASSET_TO_JSON(de_json));
-    Register::RegisterLocales<Languages::German>(ASSET_TO_XML(de_xml));
+    Diglett::Register::RegisterLocales<Language::German>(getLogger(), ASSET_TO_JSON(de_json));
+    Diglett::Register::RegisterLocales<Language::German>(getLogger(), ASSET_TO_XML(de_xml));
 
-    Register::RegisterLocales<Languages::Japanese>(ASSET_TO_JSON(ja_json));
-    Register::RegisterLocales<Languages::Japanese>(ASSET_TO_XML(ja_xml));
+    Diglett::Register::RegisterLocales<Language::Japanese>(getLogger(), ASSET_TO_JSON(ja_json));
+    Diglett::Register::RegisterLocales<Language::Japanese>(getLogger(), ASSET_TO_XML(ja_xml));
 
-    Register::RegisterLocales<Languages::Korean>(ASSET_TO_JSON(ko_json));
-    Register::RegisterLocales<Languages::Korean>(ASSET_TO_XML(ko_xml));
+    Diglett::Register::RegisterLocales<Language::Korean>(getLogger(), ASSET_TO_JSON(ko_json));
+    Diglett::Register::RegisterLocales<Language::Korean>(getLogger(), ASSET_TO_XML(ko_xml));
 
-    getLogger().info("An Example English Localization: %s", to_utf8(LocalizationDocument::GetEN()->Get("Diglett:Tests:Test1")).c_str());
-    getLogger().info("An Example English Localization: %s", to_utf8(LocalizationDocument::GetEN()->Get("Diglett:Tests:Test2")).c_str());
+    getLogger().info("An Example English Localization: %s", to_utf8(Localization::GetEN()->Get("Diglett:Tests:Test1")).c_str());
+    getLogger().info("An Example English Localization: %s", to_utf8(Localization::GetEN()->Get("Diglett:Tests:Test2")).c_str());
 
-    getLogger().info("An Example Spanish Localization: %s", to_utf8(LocalizationDocument::GetES()->Get("Diglett:Tests:Test1")).c_str());
-    getLogger().info("An Example Spanish Localization: %s", to_utf8(LocalizationDocument::GetES()->Get("Diglett:Tests:Test2")).c_str());
+    getLogger().info("An Example Spanish Localization: %s", to_utf8(Localization::GetES()->Get("Diglett:Tests:Test1")).c_str());
+    getLogger().info("An Example Spanish Localization: %s", to_utf8(Localization::GetES()->Get("Diglett:Tests:Test2")).c_str());
 }
