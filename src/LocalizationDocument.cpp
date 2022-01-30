@@ -10,10 +10,6 @@ LocalizationDocument LocalizationDocument::DE = LocalizationDocument();
 LocalizationDocument LocalizationDocument::JA = LocalizationDocument();
 LocalizationDocument LocalizationDocument::KO = LocalizationDocument();
 
-std::string LocalizationDocument::operator[](std::string key) {
-    return translations.find(key)->second;
-}
-
 void LocalizationDocument::AddLocalizations(std::map<std::string, std::string> map) {
     translations.merge(map);
     for (const auto& pair : map) {
@@ -36,4 +32,8 @@ LocalizationDocument LocalizationDocument::GetKO() { return KO; }
 LocalizationDocument::LocalizationDocument() {
     translations = std::map<std::string, std::string>();
 
+}
+
+std::string LocalizationDocument::Get(std::string key) {
+    return translations.find(key)->second;
 }

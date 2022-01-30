@@ -28,7 +28,7 @@ namespace Diglett {
          * @param key The key of the desired localization
          * @return  The localized string for the document language
          */
-        std::string operator[](std::string key);
+        std::string Get(std::string key);
 
         /**
          *
