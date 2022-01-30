@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <utility>
 
 namespace Diglett {
@@ -17,6 +18,7 @@ namespace Diglett {
         static LocalizationDocument *DE;
         static LocalizationDocument *JA;
         static LocalizationDocument *KO;
+        static std::map<std::string, > customLocalizationDocuments;
 
         std::vector<std::pair<std::string, std::string>> translations;
 
@@ -65,6 +67,19 @@ namespace Diglett {
          * @return The current set of Korean locales
          */
         static LocalizationDocument *GetKO();
+
+        /**
+         * Gets a LocalizationDocument for a custom language
+         * @param name The name/id of the language to get
+         * @return A LocalizationDocument of the custom language
+         */
+        static LocalizationDocument *GetCustom(std::string name);
+
+        /**
+         * Gets the LocalizationDocument of that language the is currently selected by Polyglot
+         * @return A LocalizationDocument of the currently selected language
+         */
+        static LocalizationDocument *GetSelected();
 
         /**
          * Adds new localisations to the document from the contents of a file

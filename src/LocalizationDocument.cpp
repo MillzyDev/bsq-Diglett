@@ -3,6 +3,8 @@ using namespace Diglett;
 
 #include "main.hpp"
 
+#include "Polyglot/Localization.hpp"
+
 LocalizationDocument *LocalizationDocument::EN = new LocalizationDocument();
 LocalizationDocument *LocalizationDocument::FR = new LocalizationDocument();
 LocalizationDocument *LocalizationDocument::ES = new LocalizationDocument();
@@ -51,4 +53,30 @@ std::string LocalizationDocument::Get(const std::string& key) {
     }
     if (first.empty() && second.empty()) return key;
     else return second;
+}
+
+LocalizationDocument *LocalizationDocument::GetCustom(std::string name) {
+    return nullptr;
+}
+
+LocalizationDocument *LocalizationDocument::GetSelected() {
+    Polyglot::Language selectedLanguage = Polyglot::Localization::get_Instance()->get_SelectedLanguage();
+    auto selected = (Languages) selectedLanguage.value;
+
+    switch (selected) {
+        case Languages::French:
+            return GetFR();
+        case Languages::Spanish:
+            return GetES();
+        case Languages::German:
+            return GetDE();
+        case Languages::Japanese:
+            return GetJA();
+        case Languages::Korean:
+            return GetKO();
+        case Languages::English:
+        default:
+            return GetEN();
+
+    }
 }
