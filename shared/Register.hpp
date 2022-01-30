@@ -8,6 +8,7 @@
 #include <utility>
 
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
+#include "beatsaber-hook/shared/utils/logging.hpp"
 
 #include "rapidxml/rapidxml.hpp"
 
@@ -37,8 +38,8 @@ namespace Diglett {
          * @param file The input json file
          */
         template<Languages L>
-        static void RegisterLocales(rapidjson::MemoryStream memoryStream) {
-            getLogger().info("Registering JSON locale");
+        static void RegisterLocales(Logger &logger, rapidjson::MemoryStream memoryStream) {
+            logger.info("Registering JSON locale");
             LocalizationDocument *ld = GetDocument<L>();
 
             ld->AddLocalizations(Parsing::ParseJson(memoryStream));
@@ -50,30 +51,30 @@ namespace Diglett {
          * @param xml  The input xml file
          */
         template<Languages L>
-        static void RegisterLocales(char *xml) {
-            getLogger().info("Registering XML locale");
+        static void RegisterLocales(Logger &logger, char *xml) {
+            logger.info("Registering XML locale");
             LocalizationDocument *ld = GetDocument<L>();
 
             ld->AddLocalizations(Parsing::ParseXml(xml));
         }
 
         /**
-         * Register json custom locale files
+         * Register json custom locale files WARNING: WILL CAUSE NULLPTR DEREF
          * @param file The input json file
          */
-        static void RegisterCustomLocales(std::string name, rapidjson::MemoryStream memoryStream) {
-            getLogger().info("Registering JSON locale");
+        static void RegisterCustomLocales(Logger &logger, std::string name, rapidjson::MemoryStream memoryStream) {
+            logger.info("Registering JSON locale");
             LocalizationDocument *ld = GetCustomDocument(std::move(name));
 
             ld->AddLocalizations(Parsing::ParseJson(memoryStream));
         }
 
         /**
-         * Register xml custom locale files
+         * Register xml custom locale files WARNING: WILL CAUSE NULLPTR DEREF
          * @param xml  The input xml file
          */
-        static void RegisterCustomLocales(std::string name, char *xml) {
-            getLogger().info("Registering XML locale");
+        static void RegisterCustomLocales(Logger &logger, std::string name, char *xml) {
+            logger.info("Registering XML locale");
             LocalizationDocument *ld = GetCustomDocument(std::move(name));
 
             ld->AddLocalizations(Parsing::ParseXml(xml));
