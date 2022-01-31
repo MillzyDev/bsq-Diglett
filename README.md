@@ -20,7 +20,7 @@ It can be found pinned in #quest-mod-dev in the BSMG. You can of course manually
 
 Add the script to your CMakeLists.txt and include `assets.hpp` in your `main.cpp` file. (It doesnt matter if exists or not currently; it will be created when you build)
 
-Install Diglett with `qpm-rust dependency add Diglett` and `qpm-rust restore`
+Install Diglett with `qpm-rust dependency add diglett` and `qpm-rust restore`
 
 Include the header `Diglett/shared/Diglett.hpp` in your `main.cpp` file.
 
