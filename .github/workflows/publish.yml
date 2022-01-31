@@ -1,8 +1,6 @@
-
 name: Publish QPM Package
 
 env:
-  ndkname: android-ndk-r22
   module_id: Diglett
   qmodName: Diglett
 
@@ -14,7 +12,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
         name: Checkout
@@ -28,6 +26,7 @@ jobs:
         run: |
           echo "$ANDROID_NDK_LATEST_HOME" > ${GITHUB_WORKSPACE}/ndkpath.txt
           cat ${GITHUB_WORKSPACE}/ndkpath.txt
+
       - name: Get QPM
         if: steps.cache-qpm.outputs.cache-hit != 'true'
         uses: dawidd6/action-download-artifact@v2
@@ -42,6 +41,7 @@ jobs:
         run: |
           chmod +x ./QPM/qpm-rust
           ./QPM/qpm-rust collapse
+
       - name: QPM Dependencies Cache
         id: cache-qpm-deps
         uses: actions/cache@v2
@@ -54,12 +54,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
       - name: QPM Restore
         run: |
           ./QPM/qpm-rust restore
-
-      - name: Run QPM legacy fix
-        run: ./QPM/qpm-rust cache legacy-fix
 
       - name: List Post Restore
         run: |
@@ -69,6 +67,11 @@ jobs:
           ls -la ${GITHUB_WORKSPACE}/extern/libs
           echo cache:
           ls -la $HOME/.local/share/QPM-Rust/cache
+
+      - name: Apply Legacy Fix
+        run: |
+          ./QPM/qpm-rust cache legacy-fix
+
       - name: Get Tag Version
         id: get_tag_version
         run: |
@@ -83,12 +86,13 @@ jobs:
       - name: Build
         run: |
           cd ${GITHUB_WORKSPACE}
-          ./QPM/qpm-rust qmod build --include_libs "lib${module_id}.so"
+          ./QPM/qpm-rust qmod build --include_libs "lib${module_id}.so" --isLibrary=true
           pwsh -Command ./build.ps1
 
       - name: Create Qmod
         run: |
           pwsh -Command ./buildQMOD.ps1 ${{env.qmodName}}
+
       # Commit the change to the package, .vscode/c_cpp_properties.json, and Android.mk
       - name: Configure commit
         run: |
@@ -140,6 +144,7 @@ jobs:
           pattern="lib${module_id}*.so"
           files=( $pattern )
           echo ::set-output name=NAME::"${files[0]}"
+
       # Upload our release assets
       - name: Upload Release Asset
         id: upload_release_asset
@@ -159,7 +164,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
-          asset_path: ./build/debug_${{ steps.libname.outputs.NAME }}
+          asset_path: ./build/debug/${{ steps.libname.outputs.NAME }}
           asset_name: debug_${{ steps.libname.outputs.NAME }}
           asset_content_type: application/octet-stream
 
@@ -180,11 +185,12 @@ jobs:
           ./QPM/qpm-rust package edit-extra --soLink "${{ steps.upload_release_asset.outputs.browser_download_url }}"
           ./QPM/qpm-rust package edit-extra --debugSoLink "${{ steps.upload_debug_asset.outputs.browser_download_url }}"
           ./QPM/qpm-rust package edit-extra --modLink "${{ steps.upload_qmod_asset.outputs.browser_download_url }}"
+
       - name: Commit Changed package info
         run: |
           git add qpm.json
           git commit -m "Updated qpm.json"
-      
+
       # Then, we want to use the commit we have just made, and force push our tag to that commit
       - name: Get Commit ID
         id: get_created_commit_id
@@ -197,9 +203,9 @@ jobs:
           git push origin HEAD:version-${{ steps.get_tag_version.outputs.TAG }} --force
           git tag --force ${{ steps.get_tag_version.outputs.TAG }} ${{ steps.get_created_commit_id.outputs.ID }}
           git push --tags --force
+          
+          #     - name: Merge this branch into whatever branch we were originally built off of.
+          #       TODO
 
-#     - name: Merge this branch into whatever branch we were originally built off of.
-#       TODO
-#      Not a Package  
-#    - name: QPM Publish
-#      run: ./QPM/qpm-rust publish
+      - name: QPM Publish
+        run: ./QPM/qpm-rust publish
