@@ -4,7 +4,6 @@ env:
   ndkname: android-ndk-r23
   module_id: Diglett
   qmodName: Diglett
-  cache-name: diglett_cache
 
 on:
   push:
@@ -42,7 +41,6 @@ jobs:
         run: |
           chmod +x ./QPM/qpm-rust
           ./QPM/qpm-rust collapse
-      # added the cache on the off chance the qpm.json stays the same across versions
       - name: QPM Dependencies Cache
         id: cache-qpm-deps
         uses: actions/cache@v2
@@ -57,8 +55,11 @@ jobs:
             ${{ runner.os }}-
       - name: QPM Restore
         run: |
-          chmod +x ./QPM/qpm-rust
           ./QPM/qpm-rust restore
+
+      - name: Run QPM legacy fix
+        run: ./QPM/qpm-rust cache legacy-fix
+
       - name: List Post Restore
         run: |
           echo includes:
@@ -67,7 +68,6 @@ jobs:
           ls -la ${GITHUB_WORKSPACE}/extern/libs
           echo cache:
           ls -la $HOME/.local/share/QPM-Rust/cache
-
       - name: Get Tag Version
         id: get_tag_version
         run: |
@@ -82,11 +82,12 @@ jobs:
       - name: Build
         run: |
           cd ${GITHUB_WORKSPACE}
-          ./QPM/qpm-rust qmod build --isLibrary=true
+          ./QPM/qpm-rust qmod build --include_libs "lib${module_id}.so"
           pwsh -Command ./build.ps1
+
       - name: Create Qmod
         run: |
-          pwsh -Command ./buildQMOD.ps1 ${{env.qmodName}}
+          pwsh -Command ./createqmod.ps1 ${{env.qmodName}}
       # Commit the change to the package, .vscode/c_cpp_properties.json, and Android.mk
       - name: Configure commit
         run: |
@@ -95,15 +96,13 @@ jobs:
       - name: Commit Edit Version
         run: |
           git add ./qpm.json
-          git commit -m "Update Version and post restore"
-
+          git commit -m "Update Version and post restore" --allow-empty
       # Then, we want to use the commit we have just made, and force push our tag to that commit
       - name: Get Commit ID
         id: get_commit_id
         run: |
           echo `git rev-parse HEAD`
           echo ::set-output name=ID::`git rev-parse HEAD`
-
       - name: Force create tag
         run: |
           git tag --force ${{ steps.get_tag_version.outputs.TAG }} ${{ steps.get_commid_id.outputs.ID }}
@@ -140,7 +139,7 @@ jobs:
           pattern="lib${module_id}*.so"
           files=( $pattern )
           echo ::set-output name=NAME::"${files[0]}"
-
+      # Upload our release assets
       - name: Upload Release Asset
         id: upload_release_asset
         uses: actions/upload-release-asset@v1
@@ -163,15 +162,15 @@ jobs:
           asset_name: debug_${{ steps.libname.outputs.NAME }}
           asset_content_type: application/octet-stream
 
-      - name: Upload Qmod Asset
+      - name: Upload Qmod asset
         id: upload_qmod_asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
-          asset_path: ./${{env.qmodName}}.qmod
-          asset_name: ${{env.qmodName}}.qmod
+          asset_path: ./${{ env.qmodName }}.qmod
+          asset_name: ${{ env.qmodName }}.qmod
           asset_content_type: application/octet-stream
 
       - name: Change QPM Package Info
@@ -180,7 +179,6 @@ jobs:
           ./QPM/qpm-rust package edit-extra --soLink "${{ steps.upload_release_asset.outputs.browser_download_url }}"
           ./QPM/qpm-rust package edit-extra --debugSoLink "${{ steps.upload_debug_asset.outputs.browser_download_url }}"
           ./QPM/qpm-rust package edit-extra --modLink "${{ steps.upload_qmod_asset.outputs.browser_download_url }}"
-
       - name: Commit Changed package info
         run: |
           git add qpm.json
@@ -199,5 +197,8 @@ jobs:
           git tag --force ${{ steps.get_tag_version.outputs.TAG }} ${{ steps.get_created_commit_id.outputs.ID }}
           git push --tags --force
 
-      - name: QPM Publish
-        run: ./QPM/qpm-rust publish
+#     - name: Merge this branch into whatever branch we were originally built off of.
+#       TODO
+#      Not a Package
+#    - name: QPM Publish
+#      run: ./QPM/qpm-rust publish        run: ./QPM/qpm-rust publish
