@@ -1,6 +1,14 @@
 # Diglett: Diglett: Easy Localization for Beat Saber
 
-Diglett is a library that allows you to easily add localisation for your Beat Saber quest mods.
+
+<p float="left">
+  <p>
+    Want to add localization to your Beat Saber mods? <br>    
+    Don't wanna deal with the polyglot bulshittery?
+    Then you should use <strong>Diglett</strong>                           
+  </p>
+  <img src="https://user-images.githubusercontent.com/64277238/151868295-0c690320-6333-4b74-90a6-c7003edb600f.png" alt="drawing" width="200"/>     
+</p>
 
 ## Tutorial
 
