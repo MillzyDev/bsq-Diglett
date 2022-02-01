@@ -114,6 +114,41 @@ or
 
 Please be consistent with keys and only use one format in your mod to avoid confusion.
 
+### Creating Custom Localization Files
+
+Creating custom localizations is almost exactly the same as creating regular localizations
+
+I do recommend that you stick to the following naming convention: <br>
+Please use the full name of the custom localization in the file like below:
+- A custom LOLCAT localization would have a file created as either:
+  - `lolcat.json`
+  <br>
+  or
+  - `lolcat.xml`
+- And a custom Pirate Speak localization would have a file created as either:
+  - `pirate_speak.json`
+  <br>
+  or
+  - `pirate_speak.xml`
+
+The file contents would follow the same format as regular localizations
+
+**JSON:**
+```xml
+<resources>
+  <string name="CustomLangs:LOLCAT:Solo">lonleh kitteh</string>
+  <string name="CustomLangs:LOLCAT:Multiplayer">i can haz frens</string>
+</resources>
+```
+
+**XML:**
+```json
+{
+  "CustomLangs:Pirate_Speak:Solo": "Swashbucklin'",
+  "CustomLangs:Pirate_Peak:Multiplayer": "Play with ya mates"
+}
+```
+
 ### Registering Localization Files/Assets
 
 Run `./build.ps1` in your project to compile the assets/files into the header.
@@ -157,6 +192,32 @@ extern "C" void load() {
     // Same is true for XML
     // "es.xml" becomes "es_xml"
     Diglett::Register::RegisterLocales<Language::Spanish>(ASSET_TO_JSON(es_xml));
+    
+    ...
+}
+```
+
+#### Registering Custom Localizations
+
+Registering Localizations is the same as registering regular localizations, however there are some differences:
+- Custom Localizations are registered differently
+- `RegisterCustomLocales()` has a different template argument
+
+Custom Localizations are registered into a map of custom localizations rather than each assigned their own property in `LocalizationDocument`
+
+Actually Registering the custom locales is straight forward:
+
+```cpp
+extern "C" void load() {
+    il2cpp_functions::Init();
+
+    getLogger().info("Registering custom locales");
+    
+    // Instead of using the languages enumerator for selecting the language,
+    // the TArg takes an std::string value instead, this will be used to find your language manually.
+    Diglett::Register::RegisterCustomLocales<"LOLCAT">(ASSET_TO_JSON(lolcat_json));
+
+    Diglett::Register::RegisterCustomLocales<"Pirate_Speak">(ASSET_TO_XML(pirate_speak_xml));
     
     ...
 }
