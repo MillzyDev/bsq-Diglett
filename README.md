@@ -19,7 +19,9 @@ Documentation can be found here.
 - [Creating a Localization File](#creating-a-localization-file)
   - [Create a JSON Localization File](#to-create-a-json-localization-file)
   - [Create an XML Localization File](#to-create-an-xml-localization-file)
+  - [Creating Custom Localization Files](#creating-custom-localization-files)
 - [Registering Localizations](#registering-localization-filesassets)
+  - [Registering Custom Localizations](#registering-custom-localizations)
 - [Getting Localizations from Key](#getting-localizations-from-key)
 
 ### Setup
