@@ -4,7 +4,7 @@
 <p float="left">
   <p>
     Want to add localization to your Beat Saber mods? <br>    
-    Don't wanna deal with the polyglot bulshittery?
+    Don't wanna deal with the pain of using CSV and Polyglot?
     Then you should use <strong>Diglett</strong>                           
   </p>
   <img src="https://user-images.githubusercontent.com/64277238/151868295-0c690320-6333-4b74-90a6-c7003edb600f.png" alt="drawing" width="200"/>     
