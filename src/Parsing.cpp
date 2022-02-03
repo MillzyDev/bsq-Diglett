@@ -24,8 +24,6 @@ std::map<std::string, std::u16string> Parsing::ParseJson(
 
     return map;
 }
-static std::map<std::string, std::u16string> ParseXml(char16_t *xml);
-}
 
 std::map<std::string, std::u16string> Parsing::ParseXml(char16_t *xml) {
     rapidxml::xml_document<char16_t> document;
