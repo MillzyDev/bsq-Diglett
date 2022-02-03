@@ -1,4 +1,3 @@
-#include "Format.hpp"
 #include "Languages.hpp"
 #include "LocalizationDocument.hpp"
 #include "Parsing.hpp"
