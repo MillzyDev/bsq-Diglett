@@ -12,14 +12,14 @@
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/encodings.h"
 #include "beatsaber-hook/shared/utils/logging.hpp"
 
-#include "rapidxml/rapidxml.hpp"
+//#include "rapidxml/rapidxml.hpp"
 
 /**
  * Used to convert assets from " laurie's fully™️-functional objcopy cmake script" to rapidjson::MemoryStreams without too much eyesore
  */
 #define ASSET_TO_JSON(asset) rapidjson::EncodedInputStream<rapidjson::UTF16<char16_t>, rapidjson::MemoryStream>(rapidjson::MemoryStream(copyStr(asset::getData(), asset::getLength())))
 
-#define ASSET_TO_XML(asset) copyStr(asset::getData(), asset::getLength())
+//#define ASSET_TO_XML(asset) copyStr(asset::getData(), asset::getLength())
 
 inline char16_t *copyStr(uint8_t *data, size_t length) {
     auto *str = new char16_t[length + 1];
@@ -45,18 +45,18 @@ namespace Diglett {
             ld->AddLocalizations(Parsing::ParseJson(memoryStream));
         }
 
-        /**
-         * Register xml locale files
-         * @tparam L  The language of the inputted file
-         * @param xml  The input xml file
-         */
-        template<Languages L>
-        static void RegisterLocales(Logger &logger, char16_t *xml) {
-            logger.info("Registering XML locale");
-            LocalizationDocument *ld = GetDocument<L>();
-
-            ld->AddLocalizations(Parsing::ParseXml(xml));
-        }
+        ///**
+        // * Register xml locale files
+        // * @tparam L  The language of the inputted file
+        // * @param xml  The input xml file
+        // */
+        //template<Languages L>
+        //static void RegisterLocales(Logger &logger, char16_t *xml) {
+        //    logger.info("Registering XML locale");
+        //    LocalizationDocument *ld = GetDocument<L>();
+        //
+        //    ld->AddLocalizations(Parsing::ParseXml(xml));
+        //}
 
         /**
          * Register json custom locale files WARNING: WILL CAUSE NULLPTR DEREF
@@ -69,16 +69,16 @@ namespace Diglett {
             ld->AddLocalizations(Parsing::ParseJson(memoryStream));
         }
 
-        /**
-         * Register xml custom locale files WARNING: WILL CAUSE NULLPTR DEREF
-         * @param xml  The input xml file
-         */
-        static void RegisterCustomLocales(Logger &logger, const std::string& name, char16_t *xml) {
-            logger.info("Registering XML locale");
-            LocalizationDocument *ld = GetCustomDocument(name);
-
-            ld->AddLocalizations(Parsing::ParseXml(xml));
-        }
+        ///**
+        // * Register xml custom locale files WARNING: WILL CAUSE NULLPTR DEREF
+        // * @param xml  The input xml file
+        // */
+        //static void RegisterCustomLocales(Logger &logger, const std::string& name, char16_t *xml) {
+        //    logger.info("Registering XML locale");
+        //    LocalizationDocument *ld = GetCustomDocument(name);
+        //
+        //    ld->AddLocalizations(Parsing::ParseXml(xml));
+        //}
 
     private:
         template<Languages L>

@@ -8,7 +8,7 @@
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/encodedstream.h"
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/document.h"
 #include "beatsaber-hook/shared/rapidjson/include/rapidjson/encodings.h"
-#include "rapidxml/rapidxml.hpp"
+//#include "rapidxml/rapidxml.hpp"
 
 #include "main.hpp"
 
@@ -17,6 +17,6 @@ namespace Diglett {
     public:
         static std::map<std::string, std::u16string> ParseJson(
                 rapidjson::EncodedInputStream<rapidjson::UTF16<char16_t>, rapidjson::MemoryStream>& memoryStream);
-        static std::map<std::string, std::u16string> ParseXml(char16_t *xml);
+        //static std::map<std::string, std::u16string> ParseXml(char16_t *xml);
     };
 }
