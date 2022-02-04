@@ -15,17 +15,17 @@
 //#include "rapidxml/rapidxml.hpp"
 
 /**
- * Used to convert assets from " laurie's fully™️-functional objcopy cmake script" to rapidjson::MemoryStreams without too much eyesore
+ * Used to convert assets from " laurie's fully™️-functional objcopy cmake script" to std::u16strings without too much eyesore
  */
-#define ASSET_TO_JSON(asset) rapidjson::EncodedInputStream<rapidjson::UTF16<char16_t>, rapidjson::MemoryStream>(rapidjson::MemoryStream(copyStr(asset::getData(), asset::getLength())))
 
-//#define ASSET_TO_XML(asset) copyStr(asset::getData(), asset::getLength())
 
-inline char16_t *copyStr(uint8_t *data, size_t length) {
+#define ASSET_TO_STR(asset) copyStr(asset::getData(), asset::getLength())
+
+inline std::u16string copyStr(uint8_t *data, size_t length) {
     auto *str = new char16_t[length + 1];
     memcpy(str, data, length);
     str[length] = '\0';
-    return str;
+    return {str};
 }
 
 namespace Diglett {
@@ -38,11 +38,11 @@ namespace Diglett {
          * @param file The input json file
          */
         template<Languages L>
-        static void RegisterLocales(Logger &logger, rapidjson::EncodedInputStream<rapidjson::UTF16<char16_t>, rapidjson::MemoryStream>& memoryStream) {
+        static void RegisterLocales(Logger &logger, const std::u16string& json) {
             logger.info("Registering JSON locale");
             LocalizationDocument *ld = GetDocument<L>();
 
-            ld->AddLocalizations(Parsing::ParseJson(memoryStream));
+            ld->AddLocalizations(Parsing::ParseJson(json));
         }
 
         ///**
@@ -62,11 +62,11 @@ namespace Diglett {
          * Register json custom locale files WARNING: WILL CAUSE NULLPTR DEREF
          * @param file The input json file
          */
-        static void RegisterCustomLocales(Logger &logger, const std::string& name, rapidjson::EncodedInputStream<rapidjson::UTF16<char16_t>, rapidjson::MemoryStream>& memoryStream) {
+        static void RegisterCustomLocales(Logger &logger, const std::string& name, const std::u16string& json) {
             logger.info("Registering JSON locale");
             LocalizationDocument *ld = GetCustomDocument(name);
 
-            ld->AddLocalizations(Parsing::ParseJson(memoryStream));
+            ld->AddLocalizations(Parsing::ParseJson(json));
         }
 
         ///**

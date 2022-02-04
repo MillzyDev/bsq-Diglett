@@ -1,31 +1,26 @@
 #include "Parsing.hpp"
 using namespace Diglett;
 
-#include "beatsaber-hook/shared/rapidjson/include/rapidjson/document.h"
-#include "beatsaber-hook/shared/rapidjson/include/rapidjson/encodings.h"
-#include "rapidxml/rapidxml.hpp"
+//#include "rapidxml/rapidxml.hpp"
 
 #include "main.hpp"
 
 #include <utility>
 
-std::map<std::string, std::u16string> Parsing::ParseJson(
-        rapidjson::EncodedInputStream<rapidjson::UTF16<char16_t>, rapidjson::MemoryStream>& memoryStream) {
-
-    rapidjson::GenericDocument<rapidjson::UTF16<char16_t>> document;
-    document.ParseStream(memoryStream);
+std::map<std::string, std::u16string> Parsing::ParseJson(const std::u16string& _json) {
+    auto json = nlohmann::json::parse(_json);
 
     auto map = std::map<std::string, std::u16string>();
 
-    for (auto &obj : document.GetObject()) {
-        getLogger().info("Adding locale to map - %s: %s", to_utf8(obj.name.GetString()).c_str(), to_utf8(obj.value.GetString()).c_str());
-        map.insert(std::pair<std::string, std::u16string>(to_utf8(obj.name.GetString()), obj.value.GetString()));
+    for (const auto& el : json.items()) {
+        getLogger().info(R"(Mapping: "%s": "%s")", el.key().c_str(), to_utf8((std::u16string)el.value()).c_str());
+        map.insert(std::pair<std::string, std::u16string>(el.key(), el.value()));
     }
 
     return map;
 }
 
-std::map<std::string, std::u16string> Parsing::ParseXml(char16_t *xml) {
+/*std::map<std::string, std::u16string> Parsing::ParseXml(char16_t *xml) {
     rapidxml::xml_document<char16_t> document;
     document.parse<0>(xml);
 
@@ -38,5 +33,5 @@ std::map<std::string, std::u16string> Parsing::ParseXml(char16_t *xml) {
     }
 
     return map;
-}
+}*/
 
