@@ -3,8 +3,6 @@
 #include "Parsing.hpp"
 #include "Register.hpp"
 
-#include "beatsaber-hook/shared/rapidjson/include/rapidjson/memorystream.h"
-
-#define Language Diglett::Languages
-
 typedef Diglett::LocalizationDocument Localization;
+typedef Diglett::Register LocaleRegister;
+typedef Diglett::Languages Language;
