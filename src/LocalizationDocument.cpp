@@ -49,25 +49,3 @@ LocalizationDocument *LocalizationDocument::GetCustom(const std::string& name) {
 
     return customLocalizationDocuments[name];
 }
-
-LocalizationDocument *LocalizationDocument::GetSelected() {
-    Polyglot::Language selectedLanguage = Polyglot::Localization::get_Instance()->get_SelectedLanguage();
-    auto selected = (Languages) selectedLanguage.value;
-
-    switch (selected) {
-        case Languages::French:
-            return GetFR();
-        case Languages::Spanish:
-            return GetES();
-        case Languages::German:
-            return GetDE();
-        case Languages::Japanese:
-            return GetJA();
-        case Languages::Korean:
-            return GetKO();
-        case Languages::English:
-        default:
-            return GetEN();
-
-    }
-}

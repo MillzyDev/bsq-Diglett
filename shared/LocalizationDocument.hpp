@@ -6,6 +6,15 @@
 #include <map>
 #include <utility>
 
+#if defined(HAS_CODEGEN) || __has_include("Polyglot/Localization.hpp")
+#include "Polyglot/Localization.hpp"
+#elif
+
+#endif
+
+#include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
+#include "beatsaber-hook/shared/utils/utils.h"
+
 namespace Diglett {
     class LocalizationDocument {
 
@@ -77,7 +86,36 @@ namespace Diglett {
          * Gets the LocalizationDocument of that language the is currently selected by Polyglot
          * @return A LocalizationDocument of the currently selected language
          */
-        static LocalizationDocument *GetSelected();
+        inline static LocalizationDocument *GetSelected() {
+#if defined(HAS_CODEGEN) || __has_include("Polyglot/Localization.hpp")
+            Polyglot::Language selectedLanguage = Polyglot::Localization::get_Instance()->get_SelectedLanguage();
+            auto selected = (Diglett::Language) selectedLanguage.value;
+#elif
+            static auto getInstanceMethodInfo = CRASH_UNLESS((il2cpp_utils::FindMethodUnsafe("Polyglot", "Localization", "get_Instance", 0)));
+            auto instance = il2cpp_utils::RunMethod(nullptr, getInstanceMethodInfo);
+
+            static auto getSelectedLanguageMethodInfo = CRASH_UNLESS(il2cpp_utils::FindMethodUnsafe(instance.value(), "get_SelectedLanguage", 0));
+            auto selectedLanguage = il2cpp_utils::RunMethod<int>(instance, getSelectedLanguageMethodInfo);
+
+            auto selected = (Diglett::Language) selectedLanguage;
+#endif
+
+            switch (selected) {
+                case Diglett::Language::French:
+                    return GetFR();
+                case Diglett::Language::Spanish:
+                    return GetES();
+                case Diglett::Language::German:
+                    return GetDE();
+                case Diglett::Language::Japanese:
+                    return GetJA();
+                case Diglett::Language::Korean:
+                    return GetKO();
+                case Diglett::Language::English:
+                default:
+                    return GetEN();
+            }
+        }
 
         /**
          * Adds new localisations to the document from the contents of a file
