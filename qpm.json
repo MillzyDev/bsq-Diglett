@@ -28,7 +28,10 @@
     {
       "id": "codegen",
       "versionRange": "^0.19.2",
-      "additionalData": {}
+      "additionalData": {
+        "private":true,
+        "includeQmod": false
+      }
     }
   ],
   "additionalData": {}
