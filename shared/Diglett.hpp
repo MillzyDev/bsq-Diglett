@@ -5,4 +5,4 @@
 
 typedef Diglett::LocalizationDocument Localization;
 typedef Diglett::Register LocaleRegister;
-typedef Diglett::Languages Language;
+typedef Diglett::Language Language;

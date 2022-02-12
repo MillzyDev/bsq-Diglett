@@ -37,7 +37,7 @@ namespace Diglett {
          * @tparam L The language of the inputted file
          * @param file The input json file
          */
-        template<Languages L>
+        template<Language L>
         static void RegisterLocales(Logger &logger, const std::u16string& json) {
             logger.info("Registering JSON locale");
             LocalizationDocument *ld = GetDocument<L>();
@@ -81,26 +81,26 @@ namespace Diglett {
         //}
 
     private:
-        template<Languages L>
+        template<Language L>
         static LocalizationDocument *GetDocument() {
             LocalizationDocument *ld = nullptr;
             switch (L) {
-                case Languages::English:
+                case Language::English:
                     ld = LocalizationDocument::GetEN();
                     break;
-                case Languages::French:
+                case Language::French:
                     ld = LocalizationDocument::GetFR();
                     break;
-                case Languages::Spanish:
+                case Language::Spanish:
                     ld = LocalizationDocument::GetES();
                     break;
-                case Languages::German:
+                case Language::German:
                     ld = LocalizationDocument::GetDE();
                     break;
-                case Languages::Japanese:
+                case Language::Japanese:
                     ld = LocalizationDocument::GetJA();
                     break;
-                case Languages::Korean:
+                case Language::Korean:
                     ld = LocalizationDocument::GetKO();
                     break;
             }
