@@ -1,9 +1,13 @@
 #include "main.hpp"
 
-#include "Diglett.hpp"
-
 #include "assets.hpp"
 
+#include "Register.hpp"
+#include "Conversions.hpp"
+
+#include "Tests/TestViewController.hpp"
+
+#include "questui/shared/QuestUI.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
@@ -21,6 +25,7 @@ Logger& getLogger() {
 }
 
 // Called at the early stages of game loading
+[[maybe_unused]]
 extern "C" void setup(ModInfo& info) {
     info.id = ID;
     info.version = VERSION;
@@ -31,32 +36,18 @@ extern "C" void setup(ModInfo& info) {
 }
 
 // Called later on in the game loading - a good time to install function hooks
+[[maybe_unused]]
 extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Registering locales");
 
-    Diglett::Register::RegisterLocales<Language::English>(getLogger(), ASSET_TO_JSON(en_json));
-    Diglett::Register::RegisterLocales<Language::English>(getLogger(), ASSET_TO_XML(en_xml));
+    Diglett::RegisterAsset(ASSET_TO_STR(en_xml), Diglett::Language::ENGLISH);
+    Diglett::RegisterAsset(ASSET_TO_STR(fr_xml), Diglett::Language::FRENCH);
+    Diglett::RegisterAsset(ASSET_TO_STR(es_xml), Diglett::Language::SPANISH);
+    Diglett::RegisterAsset(ASSET_TO_STR(de_xml), Diglett::Language::GERMAN);
+    Diglett::RegisterAsset(ASSET_TO_STR(ja_xml), Diglett::Language::JAPANESE);
+    Diglett::RegisterAsset(ASSET_TO_STR(ko_xml), Diglett::Language::KOREAN);
 
-    Diglett::Register::RegisterLocales<Language::French>(getLogger(), ASSET_TO_JSON(fr_json));
-    Diglett::Register::RegisterLocales<Language::French>(getLogger(), ASSET_TO_XML(fr_xml));
-
-    Diglett::Register::RegisterLocales<Language::Spanish>(getLogger(), ASSET_TO_JSON(es_json));
-    Diglett::Register::RegisterLocales<Language::Spanish>(getLogger(), ASSET_TO_XML(es_xml));
-
-    Diglett::Register::RegisterLocales<Language::German>(getLogger(), ASSET_TO_JSON(de_json));
-    Diglett::Register::RegisterLocales<Language::German>(getLogger(), ASSET_TO_XML(de_xml));
-
-    Diglett::Register::RegisterLocales<Language::Japanese>(getLogger(), ASSET_TO_JSON(ja_json));
-    Diglett::Register::RegisterLocales<Language::Japanese>(getLogger(), ASSET_TO_XML(ja_xml));
-
-    Diglett::Register::RegisterLocales<Language::Korean>(getLogger(), ASSET_TO_JSON(ko_json));
-    Diglett::Register::RegisterLocales<Language::Korean>(getLogger(), ASSET_TO_XML(ko_xml));
-
-    getLogger().info("An Example English Localization: %s", to_utf8(Localization::GetEN()->Get("Diglett:Tests:Test1")).c_str());
-    getLogger().info("An Example English Localization: %s", to_utf8(Localization::GetEN()->Get("Diglett:Tests:Test2")).c_str());
-
-    getLogger().info("An Example Spanish Localization: %s", to_utf8(Localization::GetES()->Get("Diglett:Tests:Test1")).c_str());
-    getLogger().info("An Example Spanish Localization: %s", to_utf8(Localization::GetES()->Get("Diglett:Tests:Test2")).c_str());
+    QuestUI::Register::RegisterMainMenuModSettingsViewController<Diglett::Tests::TestViewController *>(modInfo);
 }
