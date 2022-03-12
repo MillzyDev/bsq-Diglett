@@ -47,12 +47,12 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($useDebug -eq $true) {
-    $fileName = Get-ChildItem lib*.so -Path "build/debug" -Name
+    $fileName = Get-ChildItem libDiglett.so -Path "build/debug" -Name
 } else {
-    $fileName = Get-ChildItem lib*.so -Path "build/" -Name
+    $fileName = Get-ChildItem libDiglett.so -Path "build/" -Name
 }
 
-& adb push build/$fileName /sdcard/Android/data/com.beatgames.beatsaber/files/libs/$fileName
+& adb push build/$fileName /sdcard/Android/data/com.beatgames.beatsaber/files/mods/$fileName
 
 & $PSScriptRoot/restart-game.ps1
 
