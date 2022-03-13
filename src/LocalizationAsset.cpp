@@ -1,6 +1,6 @@
 #include "LocalizationAsset.hpp"
 
-#include "rapidxml/rapidxml.hpp"
+#include "tinyxml2/shared/tinyxml2.h"
 
 #define RESOURCES_NODE "resources"
 #define STRING_NODE "string"
@@ -20,14 +20,15 @@ const LocalizationMap &Diglett::LocalizationAsset::get_localizations() {
 Diglett::LocalizationAsset::LocalizationAsset(std::string_view str) {
     set_text(str);
 
-    rapidxml::xml_document<> doc;
-    doc.parse<0>(const_cast<char *>(str.data()));
-    auto resources = doc.first_node(RESOURCES_NODE);
+    tinyxml2::XMLDocument doc;
+    doc.Parse(str.data());
 
-    for (auto node = resources->first_node(STRING_NODE); node; node = node->next_sibling(STRING_NODE)) {
-        localizations.emplace(std::pair<std::string_view, std::string_view>(
-                std::string_view(node->first_attribute("name")->value()),
-                std::string_view(node->value()))
+    auto resources = doc.FirstChildElement(RESOURCES_NODE);
+
+    for (auto string = resources->FirstChildElement(STRING_NODE); string; string = string->NextSiblingElement(STRING_NODE)) {
+        localizations.insert(
+                std::string_view(string->FindAttribute("name")->Value()),
+                std::string_view(string->Value())
                 );
     }
 }

@@ -45,6 +45,11 @@
         "includeQmod": false,
         "private": true
       }
+    },
+    {
+      "id": "tinyxml2",
+      "versionRange": "^9.0.0",
+      "additionalData": {}
     }
   ],
   "additionalData": {}
