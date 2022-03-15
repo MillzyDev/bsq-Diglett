@@ -7,6 +7,7 @@
 
 #include "Tests/TestViewController.hpp"
 
+#include "custom-types/shared/register.hpp"
 #include "questui/shared/QuestUI.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
@@ -48,6 +49,8 @@ extern "C" void load() {
     Diglett::RegisterAsset(ASSET_TO_STR(de_xml), Diglett::Language::GERMAN);
     Diglett::RegisterAsset(ASSET_TO_STR(ja_xml), Diglett::Language::JAPANESE);
     Diglett::RegisterAsset(ASSET_TO_STR(ko_xml), Diglett::Language::KOREAN);
+
+    custom_types::Register::AutoRegister();
 
     QuestUI::Register::RegisterMainMenuModSettingsViewController<Diglett::Tests::TestViewController *>(modInfo);
 }
