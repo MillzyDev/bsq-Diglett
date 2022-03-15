@@ -1,4 +1,5 @@
 #include "LocalizationAsset.hpp"
+#include "main.hpp"
 
 #include "tinyxml2/shared/tinyxml2.h"
 
@@ -25,10 +26,12 @@ Diglett::LocalizationAsset::LocalizationAsset(std::string_view str) {
 
     auto resources = doc.FirstChildElement(RESOURCES_NODE);
 
-    for (auto string = resources->FirstChildElement(STRING_NODE); string; string = string->NextSiblingElement(STRING_NODE)) {
-        localizations.insert(
-                std::string_view(string->FindAttribute("name")->Value()),
-                std::string_view(string->Value())
+    for (auto string = resources->FirstChildElement(STRING_NODE); string != nullptr; string = string->NextSiblingElement(STRING_NODE)) {
+        localizations.emplace(
+                std::string(string->FindAttribute("name")->Value()),
+                std::string_view(string->GetText())
                 );
+        getLogger().info("Registering key: %s", string->FindAttribute("name")->Value());
     }
+
 }
