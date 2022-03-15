@@ -5,7 +5,7 @@
 
 #include "beatsaber-hook/shared/utils/typedefs-string.hpp"
 
-typedef std::unordered_map<Diglett::Language, LocalizationMap> LocalizationDocument;
+typedef std::map<Diglett::Language, LocalizationMap> LocalizationDocument;
 
 namespace Diglett {
     class Localization {
@@ -21,6 +21,6 @@ namespace Diglett {
 
         LocalizationDocument get_document();
         LocalizationMap getLocales(Language language);
-        StringW get(std::string_view key, Language language);
+        StringW get(const std::string &key, Language language);
     };
 }

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
+#include <map>
 
-typedef std::unordered_map<std::string_view, std::string_view> LocalizationMap;
+typedef std::map<std::string, std::string_view> LocalizationMap;
 
 namespace Diglett {
     class LocalizationAsset {
