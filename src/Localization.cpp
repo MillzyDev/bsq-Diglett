@@ -21,9 +21,9 @@ LocalizationMap Diglett::Localization::getLocales(Diglett::Language language) {
         get_document().emplace(language, LocalizationMap());
     }
     getLogger().info("Got document entry!");
-    return get_document()[language];
+    return get_document().find(language)->second;
 }
 
-StringW Diglett::Localization::get(std::string_view key, Diglett::Language language) {
-    return {getLocales(language)[key]};
+StringW Diglett::Localization::get(const std::string& key, Diglett::Language language) {
+    return {getLocales(language).find(key)->second};
 }
