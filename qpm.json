@@ -54,7 +54,10 @@
     {
       "id": "fmt",
       "versionRange": "^8.0.5",
-      "additionalData": {}
+      "additionalData": {
+        "includeQmod": false,
+        "private": true
+      }
     }
   ],
   "additionalData": {}
