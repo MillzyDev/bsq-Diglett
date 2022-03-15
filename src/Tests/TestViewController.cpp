@@ -5,11 +5,15 @@ using namespace QuestUI::BeatSaberUI;
 
 #include "Localization.hpp"
 #include "Util.hpp"
+#include "main.hpp"
 
 DEFINE_TYPE(Diglett::Tests, TestViewController);
 
 void Diglett::Tests::TestViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
-    auto vertical = CreateVerticalLayoutGroup(get_transform());
+    getLogger().info("Localized text is: %s", static_cast<std::string>(Diglett::Localization::get_instance()->get("Diglett:Tests:Test", Diglett::getSelectedLanguage())).c_str());
+    if (firstActivation) {
+        auto vertical = CreateVerticalLayoutGroup(get_transform());
 
-    auto text = CreateText(vertical->get_transform(), Diglett::Localization::get_instance()->get("Diglett:Tests:Test", Diglett::getSelectedLanguage()));
+        CreateText(vertical->get_transform(), Diglett::Localization::get_instance()->get("Diglett:Tests:Test", Diglett::getSelectedLanguage()));
+    }
 }
