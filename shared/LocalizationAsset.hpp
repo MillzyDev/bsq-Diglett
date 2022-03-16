@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 
-typedef std::map<std::string, std::string_view> LocalizationMap;
+typedef std::map<std::string, std::string> LocalizationMap;
 
 namespace Diglett {
     class LocalizationAsset {
