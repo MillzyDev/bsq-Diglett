@@ -10,7 +10,7 @@ void Diglett::LocalizationAsset::set_text(std::string_view text) {
     this->text = text;
 }
 
-std::string_view Diglett::LocalizationAsset::get_text() {
+[[maybe_unused]] std::string_view Diglett::LocalizationAsset::get_text() {
     return text;
 }
 
