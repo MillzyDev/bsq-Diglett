@@ -50,14 +50,6 @@
       "id": "tinyxml2",
       "versionRange": "^9.0.0",
       "additionalData": {}
-    },
-    {
-      "id": "fmt",
-      "versionRange": "^8.0.5",
-      "additionalData": {
-        "includeQmod": false,
-        "private": true
-      }
     }
   ],
   "additionalData": {}
