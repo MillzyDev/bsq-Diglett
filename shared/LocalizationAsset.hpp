@@ -13,7 +13,7 @@ namespace Diglett {
 
         void set_text(std::string_view text);
     public:
-        std::string_view get_text();
+        [[maybe_unused]] std::string_view get_text();
         const LocalizationMap &get_localizations();
 
         LocalizationAsset(std::string_view str); // NOLINT
