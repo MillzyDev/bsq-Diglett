@@ -22,5 +22,6 @@ namespace Diglett {
         LocalizationDocument &get_document();
         LocalizationMap &getLocales(Language language);
         StringW get(const std::string &key, Language language);
+        StringW get(const std::string &key);
     };
 }

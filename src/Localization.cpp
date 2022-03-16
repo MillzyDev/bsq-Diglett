@@ -1,4 +1,5 @@
 #include "Localization.hpp"
+#include "Util.hpp"
 #include "main.hpp"
 
 Diglett::Localization *Diglett::Localization::s_instance;
@@ -25,5 +26,16 @@ LocalizationMap &Diglett::Localization::getLocales(Diglett::Language language) {
 }
 
 StringW Diglett::Localization::get(const std::string& key, Diglett::Language language) {
-    return {getLocales(language).find(key)->second};
+    auto& locale = getLocales(language);
+    auto itr = locale.find(key);
+    if (itr == locale.end())
+    {
+        return key;
+    }
+    return {itr->second};
 }
+
+StringW Diglett::Localization::get(const std::string& key) {
+    return get(key, Diglett::getSelectedLanguage());
+}
+
