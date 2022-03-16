@@ -11,11 +11,11 @@ Diglett::Localization *Diglett::Localization::get_instance() {
     return s_instance;
 }
 
-LocalizationDocument Diglett::Localization::get_document() {
+LocalizationDocument &Diglett::Localization::get_document() {
     return document;
 }
 
-LocalizationMap Diglett::Localization::getLocales(Diglett::Language language) {
+LocalizationMap &Diglett::Localization::getLocales(Diglett::Language language) {
     if (get_document().find(language) == get_document().end()) {
         getLogger().info("Emplacing new document entry...");
         get_document().emplace(language, LocalizationMap());

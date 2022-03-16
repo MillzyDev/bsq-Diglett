@@ -19,8 +19,8 @@ namespace Diglett {
     public:
         static Localization *get_instance();
 
-        LocalizationDocument get_document();
-        LocalizationMap getLocales(Language language);
+        LocalizationDocument &get_document();
+        LocalizationMap &getLocales(Language language);
         StringW get(const std::string &key, Language language);
     };
 }
