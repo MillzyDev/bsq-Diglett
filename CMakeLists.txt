@@ -21,6 +21,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED 20)
 # define that stores the actual source directory
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(SHARED_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shared)
 
 # compile options used
 add_compile_options(-frtti -fexceptions)
