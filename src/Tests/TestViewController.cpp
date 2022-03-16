@@ -14,6 +14,6 @@ void Diglett::Tests::TestViewController::DidActivate(bool firstActivation, bool 
     if (firstActivation) {
         auto vertical = CreateVerticalLayoutGroup(get_transform());
 
-        CreateText(vertical->get_transform(), Diglett::Localization::get_instance()->get("Diglett:Tests:Test", Diglett::getSelectedLanguage()));
+        CreateLocalizedText(vertical->get_transform(), "Diglett:Tests:Test");
     }
 }
