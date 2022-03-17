@@ -7,7 +7,11 @@
     "version": "2.0.0",
     "url": "https://github.com/MillzyDev/bsq-Diglett",
     "additionalData": {
-      "overrideSoName": "libDiglett.so"
+      "soLink": "https://github.com/MillzyDev/bsq-Diglett/releases/download/v2.0.0/libDiglett.so",
+      "debugSoLink": "https://github.com/MillzyDev/bsq-Diglett/releases/download/v2.0.0/debug_libDiglett.so",
+      "overrideSoName": "libDiglett.so",
+      "modLink": "https://github.com/MillzyDev/bsq-Diglett/releases/download/v2.0.0/Diglett.qmod",
+      "branchName": "version-v2.0.0"
     }
   },
   "dependencies": [
