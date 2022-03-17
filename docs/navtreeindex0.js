@@ -1,0 +1,27 @@
+var NAVTREEINDEX0 =
+{
+"_conversions_8hpp_source.html":[1,0,1],
+"_language_8hpp_source.html":[1,0,2],
+"_localization_8hpp_source.html":[1,0,3],
+"_localization_asset_8hpp_source.html":[1,0,4],
+"_localized_text_8hpp_source.html":[1,0,0,0],
+"_register_8hpp_source.html":[1,0,5],
+"_util_8hpp_source.html":[1,0,6],
+"annotated.html":[0,0],
+"class_diglett_1_1_localization.html":[0,0,0,0],
+"class_diglett_1_1_localization.html#a4a0c8606c9ef74702fc85f86c6b5baa4":[0,0,0,0,2],
+"class_diglett_1_1_localization.html#a4b0d2712bd1ed8a1a6f71181982c3d7e":[0,0,0,0,1],
+"class_diglett_1_1_localization.html#a4e8b75c58995f85fe9e55fe6cc3c3165":[0,0,0,0,3],
+"class_diglett_1_1_localization.html#a9780268bf43bbd23986853c6d4767513":[0,0,0,0,0],
+"class_diglett_1_1_localization_asset.html":[0,0,0,1],
+"class_diglett_1_1_localization_asset.html#a1e686922e86da235dc80cc63be9d7fe5":[0,0,0,1,2],
+"class_diglett_1_1_localization_asset.html#a8b013de0e36fad96382de2e8d3c90b43":[0,0,0,1,1],
+"class_diglett_1_1_localization_asset.html#ab67f18362c1035092f331c3e061cd35f":[0,0,0,1,0],
+"classes.html":[0,1],
+"dir_08f45fe6822aeb4ce2bc268e3b1361be.html":[1,0,0],
+"files.html":[1,0],
+"functions.html":[0,2,0],
+"functions_func.html":[0,2,1],
+"index.html":[],
+"pages.html":[]
+};
