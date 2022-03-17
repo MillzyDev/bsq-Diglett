@@ -25,6 +25,14 @@
 var NAVTREE =
 [
   [ "Diglett", "index.html", [
+    [ "Introduction", "index.html#intro_sec", null ],
+    [ "Setup", "index.html#setup_sec", null ],
+    [ "Creating a Localization File", "index.html#file_sec", null ],
+    [ "Registering Localization Files/Assets", "index.html#register_sec", null ],
+    [ "Getting Localizations from Key", "index.html#getting_sec", [
+      [ "Getting from Specific Languages", "index.html#getting_spec_sec", null ],
+      [ "Getting from Selected Language", "index.html#getting_auto_sec", null ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -41,7 +49,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_conversions_8hpp_source.html"
+"_conversions_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
