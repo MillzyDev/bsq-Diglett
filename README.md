@@ -10,7 +10,7 @@
   <img src="https://user-images.githubusercontent.com/64277238/151868295-0c690320-6333-4b74-90a6-c7003edb600f.png" alt="drawing" width="200"/>     
 </p>
 
-#How to use
+# How to use
 [Read the documentation silly](https://millzydev.github.io/bsq-Diglett/)
 
 ## Credits
