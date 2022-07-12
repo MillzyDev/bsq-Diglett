@@ -4,7 +4,7 @@
   "info": {
     "name": "Diglett",
     "id": "diglett",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "url": "https://github.com/MillzyDev/bsq-Diglett",
     "additionalData": {
       "overrideSoName": "libDiglett.so"
@@ -27,7 +27,7 @@
     },
     {
       "id": "codegen",
-      "versionRange": "^0.21.0",
+      "versionRange": "^0.24.1",
       "additionalData": {
         "includeQmod": false,
         "private": true
@@ -35,12 +35,12 @@
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.15.8",
+      "versionRange": "^0.15.13",
       "additionalData": {}
     },
     {
       "id": "questui",
-      "versionRange": "^0.13.3",
+      "versionRange": "^0.16.1",
       "additionalData": {
         "includeQmod": false,
         "private": true
@@ -48,7 +48,7 @@
     },
     {
       "id": "tinyxml2",
-      "versionRange": "^9.0.0",
+      "versionRange": "^9.0.4",
       "additionalData": {}
     }
   ],
