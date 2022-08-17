@@ -1,0 +1,30 @@
+{
+  "_QPVersion": "0.1.1",
+  "name": "Diglett",
+  "id": "diglett",
+  "author": "Millzy",
+  "version": "2.1.0",
+  "packageId": "com.beatgames.beatsaber",
+  "packageVersion": "1.24.0",
+  "description": "library that allows you to easily add localisation for your quest mods - v2.1.0!",
+  "isLibrary": true,
+  "dependencies": [
+    {
+      "version": "^0.15.13",
+      "id": "custom-types",
+      "downloadIfMissing": "https://github.com/sc2ad/Il2CppQuestTypePatching/releases/download/v0.15.18/CustomTypes.qmod"
+    },
+    {
+      "version": "^9.0.4",
+      "id": "tinyxml2",
+      "downloadIfMissing": "https://github.com/MillzyDev/NDK-tinyxml2/releases/download/v9.0.5/tinyxml2.qmod"
+    }
+  ],
+  "modFiles": [],
+  "libraryFiles": [
+    "libDiglett.so",
+    "libbeatsaber-hook_3_10_0.so"
+  ],
+  "fileCopies": [],
+  "copyExtensions": []
+}
