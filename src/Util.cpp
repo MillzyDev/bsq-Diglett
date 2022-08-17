@@ -4,15 +4,12 @@
 #include "main.hpp"
 #include "Localization.hpp"
 
-#include "Polyglot/Localization.hpp"
-
 #include "questui/shared/BeatSaberUI.hpp"
 #include "Components/LocalizedText.hpp"
 using namespace Diglett::Components;
 
 Diglett::Language Diglett::getSelectedLanguage() {
-    getLogger().info("Selected language is NO %i", Polyglot::Localization::get_Instance()->get_SelectedLanguage().value);
-    return (Diglett::Language) Polyglot::Localization::get_Instance()->get_SelectedLanguage().value;
+    return (Language)selectedLanguage.value;
 }
 
 TMPro::TextMeshProUGUI *Diglett::CreateLocalizedText(UnityEngine::Transform *parent, std::string key, bool italic) {
