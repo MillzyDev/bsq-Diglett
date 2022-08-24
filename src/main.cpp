@@ -38,26 +38,12 @@ extern "C" void setup(ModInfo& info) {
     getLogger().info("Completed setup!");
 }
 
-Polyglot::Language selectedLanguage;
-
-MAKE_HOOK_MATCH(Localization_set_SelectedLanguage, &Polyglot::Localization::set_SelectedLanguage,
-    void, Polyglot::Localization *self, Polyglot::Language value
-) {
-    selectedLanguage = value;
-    getLogger().info("Selected language is NO %i", value.value);
-
-    Localization_set_SelectedLanguage(self, value);
-}
-
 // Called later on in the game loading - a good time to install function hooks
 [[maybe_unused]]
 extern "C" void load() {
     il2cpp_functions::Init();
 
     getLogger().info("Registering locales");
-
-    INSTALL_HOOK(getLogger(), Localization_set_SelectedLanguage)
-
     Diglett::RegisterAsset(ASSET_TO_STR(en_xml), Diglett::Language::ENGLISH);
     Diglett::RegisterAsset(ASSET_TO_STR(fr_xml), Diglett::Language::FRENCH);
     Diglett::RegisterAsset(ASSET_TO_STR(es_xml), Diglett::Language::SPANISH);
